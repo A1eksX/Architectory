@@ -1,0 +1,157 @@
+@startuml
+'вертикальный срез горизонтального уровня бизнес логики,
+'интерфейс для операции сложения
+interface calculatorMVC.model.sumOperation.InterfaceSumOperation {
+~ double sum()
+}
+'вертикальный срез горизонтального уровня бизнес логики,
+'интерфейс для операции вычитания
+interface calculatorMVC.model.substractOperation.InterfaceSubstractOperation {
+~ double subtract()
+}
+'вертикальный срез горизонтального уровня бизнес логики,
+'интерфейс для операции умножения
+interface calculatorMVC.model.multiplyOperation.InterfaceMultiplyOperation {
+~ double multiply()
+}
+'вертикальный срез горизонтального уровня бизнес логики,
+'интерфейс для операции деления
+interface calculatorMVC.model.divideOperation.InterfaceDivideOperation {
+~ double divide()
+}
+'вертикальный срез горизонтального уровня данных,
+'интерфейс для сохранения данных в бд
+interface calculatorMVC.db.saveData.SaveDataInterface {
+~ void saveData(String)
+}
+'вертикальный срез горизонтального уровня данных,
+'интерфейс для получения данных из бд
+interface calculatorMVC.db.fetchData.DBInterface {
+~ String fetchData()
+}
+'горизонтальный уровень взаимодействия с пользователем,
+'интерфейс для взаимодействия с пользователем
+interface calculatorMVC.view.IView {
+~ void runCalculator()
+}
+'вертикальный срез горизонтального уровня взаимодействия с пользователем,
+'интерфейс для ввода данных пользователем
+interface calculatorMVC.view.input.InterfaceInput {
+~ String getInput()
+}
+'вертикальный срез горизонтального уровня взаимодействия с пользователем,
+'интерфейс для вывода данных пользователю
+interface calculatorMVC.view.output.InterfaceOutput {
+~ void displayOutput(String)
+}
+
+' горизонтальный уровень данных, класс для взаимодействия с операциями вычисления
+class calculatorMVC.model.CalculationLayer {
++ double add(double,double)
++ double subtract(double,double)
++ double multiply(double,double)
++ double divide(double,double)
+}
+'вертикальный срез, горизонтального уровеня бизнес логики,
+'операция сложения
+class calculatorMVC.model.sumOperation.SumOperation {
+~ double firstArg
+~ double secondArg
++ double sum()
+}
+'вертикальный срез, горизонтального уровеня бизнес логики,
+'операция вычитания
+class calculatorMVC.model.substractOperation.SubstractOperation {
+~ double firstArg
+~ double secondArg
++ double subtract()
+}
+'вертикальный срез, горизонтального уровеня бизнес логики,
+'операция умножения
+class calculatorMVC.model.multiplyOperation.MultiplyOperation {
+~ double firstArg
+~ double secondArg
++ double multiply()
+}
+'вертикальный срез, горизонтального уровеня бизнес логики,
+'операция деления
+class calculatorMVC.model.divideOperation.DivideOperation {
+~ double firstArg
+~ double secondArg
++ double divide()
+}
+
+' горизонтальный уровень данных, класс для взаимодействия с бд,
+' взаимодействует с интерфейсами сохранения и получения данных
+class calculatorMVC.db.DatabaseManagementSlice {
+- FetchDB fetchDB
+- SaveData saveData
++ String fetchData()
++ void saveData(String)
+}
+'вертикальный срез, горизонтального уровня бизнес логики,
+'операция получения данных из БД
+class calculatorMVC.db.fetchData.FetchDB {
++ String fetchData()
+}
+'вертикальный срез, горизонтального уровня бизнес логики,
+'операция сохранение информации в БД
+class calculatorMVC.db.saveData.SaveData {
++ void saveData(String)
+}
+
+'горизонтальный уровень взаимодействия с пользователем,
+'класс для реализации консольного интерфейса,
+'взаимодействует с интерфейсами ввода и вывода
+class calculatorMVC.view.ConsoleView {
+~ InputSlice inputSlice
+~ OutputSlice outputSlice
+~ CalculationLayer calculationLayer
++ void runCalculator()
+}
+'вертикальный срез, горизонтального уровня взаимодействия с пользователем,
+' класс для ввода данных пользователем
+class calculatorMVC.view.input.InputSlice {
++ String getInput()
+}
+'вертикальный срез, горизонтального уровня взаимодействия с пользователем,
+' класс для вывода данных пользователя
+class calculatorMVC.view.output.OutputSlice {
++ void displayOutput(String)
+}
+
+'основной класс программы
+class calculatorMVC.Main {
++ {static} void main(String[])
+}
+
+
+calculatorMVC.view.input.InterfaceInput <|.. calculatorMVC.view.input.InputSlice
+calculatorMVC.model.multiplyOperation.InterfaceMultiplyOperation <|.. calculatorMVC.model.multiplyOperation.MultiplyOperation
+calculatorMVC.view.output.InterfaceOutput <|.. calculatorMVC.view.output.OutputSlice
+calculatorMVC.model.substractOperation.InterfaceSubstractOperation <|.. calculatorMVC.model.substractOperation.SubstractOperation
+calculatorMVC.model.divideOperation.InterfaceDivideOperation <|.. calculatorMVC.model.divideOperation.DivideOperation
+calculatorMVC.db.fetchData.DBInterface <|.. calculatorMVC.db.fetchData.FetchDB
+calculatorMVC.view.IView <|.. calculatorMVC.view.ConsoleView
+calculatorMVC.model.sumOperation.InterfaceSumOperation <|.. calculatorMVC.model.sumOperation.SumOperation
+calculatorMVC.db.saveData.SaveDataInterface <|.. calculatorMVC.db.saveData.SaveData
+
+CalculationLayer --> SubstractOperation : uses
+CalculationLayer --> SumOperation : uses
+CalculationLayer --> DivideOperation : uses
+CalculationLayer --> MultiplyOperation : uses
+
+DatabaseManagementSlice --> FetchDB : uses
+DatabaseManagementSlice --> SaveData : uses
+
+ConsoleView --> InputSlice : uses
+ConsoleView --> OutputSlice : uses
+
+Main --> ConsoleView : create
+Main --> DatabaseManagementSlice : create
+Main --> FetchDB : create
+Main --> SaveData : create
+Main --> CalculationLayer : create
+Main --> InputSlice : create
+
+@enduml
