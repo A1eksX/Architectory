@@ -1,0 +1,39 @@
+@startuml
+' класс точка
+class Point {
+- int x
+- int y
++ int getY()
++ int getX()
+}
+' класс отрисовывающий квадрат
+class SquareDraw {
+' переменная
+- int side
+' метод позволяет получить размер стороны квадрата
++ int getSide()
+' метод позволяет изменить размер стороны квадрата
++ void setSide(int)
+' метод позволяет нарисовать квадрат
++ void draw()
+}
+' класс квадрат
+class Square {
+' переменная - список точек
+- List<Point> points
+' переменная длина стороны
+- int side
+' метод расчёта площади
++ int getArea()
+' метод изменения размера стороны
++ int getSide()
+}
+' Основной класс с методом main
+class Main {
++ {static} void main(String[])
+}
+
+Main ..> Square : uses >
+Main ..> SquareDraw : uses >
+Square ..> Point : uses >
+@enduml

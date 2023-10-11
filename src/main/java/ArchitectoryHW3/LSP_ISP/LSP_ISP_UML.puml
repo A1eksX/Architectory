@@ -1,0 +1,74 @@
+@startuml
+' абстрактный класс из которого будут создаваться различные животные
+abstract class Animal {
+- String name
++ {abstract}String moving()
++ String toString()
+}
+' класс животный мир
+class AnimalWorld {
+' метод вернёт список животных
+- List<Animal> world
+' метод заполняет список животных
++ AnimalWorld addAnimal(Animal)
+' метод soundable вернёт список животных издающие звуки
++ List<Soundable> soundable()
+' метод speedMovings вернёт список животных
++ List<SpeedMoving> speedMovings()
+}
+' уточняющий класс анаконда
+class Anaconda {
++ String moving()
++ String getSound()
++ int getSpeedMooving()
+}
+' уточняющий класс ворон
+class Сrow {
++ String moving()
++ String getSound()
++ int getSpeedMooving()
+}
+' уточняющий класс кот
+class Cat {
++ String moving()
++ String getSound()
++ int getSpeedMooving()
+}
+' интерфейсы с методом getSound()
+interface Soundable {
+~ String getSound()
+}
+' интерфейсы с методом getSpeedMooving()
+interface SpeedMoving {
+~ int getSpeedMooving()
+}
+' Основной класс с методом main
+class Main {
++ {static} void main(String[])
+}
+
+' классс Anaconda реализует метод интерфейса Soundable
+Soundable <|.. Anaconda
+' классс Anaconda реализует метод интерфейса SpeedMoving
+SpeedMoving <|.. Anaconda
+' классс Сrow реализует метод интерфейса Soundable
+Soundable <|.. Сrow
+' классс Сrow реализует метод интерфейса SpeedMoving
+SpeedMoving <|.. Сrow
+' классс Cat реализует метод интерфейса Soundable
+Soundable <|.. Cat
+' классс Cat реализует метод интерфейса SpeedMoving
+SpeedMoving <|.. Cat
+
+' классс Сrow наследует от Animal
+Animal <|-- Сrow
+' классс Cat наследует от Animal
+Animal <|-- Cat
+' классс Anaconda наследует от Animal
+Animal <|-- Anaconda
+
+Main ..> Animal : used >
+Main ..> AnimalWorld : used >
+AnimalWorld ..|> Soundable : used >
+AnimalWorld ..|> SpeedMoving : used >
+@enduml

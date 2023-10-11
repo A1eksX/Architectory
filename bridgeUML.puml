@@ -1,0 +1,34 @@
+@startuml
+class architectoryHW6.bridge.Red {
++ void shapeColor()
+}
+class architectoryHW6.bridge.Black {
++ void shapeColor()
+}
+abstract class architectoryHW6.bridge.Shape {
+# Color color
++ {abstract}void draw()
+}
+interface architectoryHW6.bridge.Color {
+~ void shapeColor()
+}
+class architectoryHW6.bridge.Gray {
++ void shapeColor()
+}
+class architectoryHW6.bridge.Squre {
++ void draw()
+}
+class architectoryHW6.bridge.Run {
++ {static} void main(String[])
+}
+class architectoryHW6.bridge.Circle {
++ void draw()
+}
+
+
+architectoryHW6.bridge.Color <|.. architectoryHW6.bridge.Red
+architectoryHW6.bridge.Color <|.. architectoryHW6.bridge.Black
+architectoryHW6.bridge.Color <|.. architectoryHW6.bridge.Gray
+architectoryHW6.bridge.Shape <|-- architectoryHW6.bridge.Squre
+architectoryHW6.bridge.Shape <|-- architectoryHW6.bridge.Circle
+@enduml

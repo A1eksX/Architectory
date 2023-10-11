@@ -1,0 +1,41 @@
+@startuml
+' все классы по умолчанию имею конструктор, на диаграмме не указываются
+' абстрактный класс - жидкость
+abstract class liquid{
+' Приватное поле
+- String nameLiquid
+' абстрактный метод
+~ {abstract} String dateManufacture()
++ String toString()
+}
+' класс - Молоко уточняющий класс liquid
+class milk{
++  dateManufacture()
+}
+' класс - Компот уточняющий класс liquid
+class kompote {
++ dateManufacture()
+}
+' класс - Пиво уточняющий класс liquid
+class beer {
++ dateManufacture()
+}
+' класс - бутылка
+class pot{
++ Liquid nameLiquid
++ String toString()
+}
+' Основной класс с методом main
+class Main{
++ {static} void main()
+}
+'наследует от liquid
+milk --|> liquid : extends
+'наследует от liquid
+kompote --|> liquid : extends
+'наследует от liquid
+beer --|> liquid : extends
+
+pot ..> liquid : used
+Main ..|> pot : used
+@enduml

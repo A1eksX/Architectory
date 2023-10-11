@@ -1,0 +1,26 @@
+@startuml
+class flyWeight.Dog {
++ void zoo()
+}
+class flyWeight.Cat {
++ void zoo()
+}
+class flyWeight.Main {
++ {static} void main(String[])
+}
+class flyWeight.FactoryAnimal {
+- Map<String,IAnimal> map
+~ IAnimal getAnimal(String)
+}
+interface flyWeight.IAnimal {
++ void zoo()
+}
+
+
+flyWeight.IAnimal <|.. flyWeight.Dog
+flyWeight.IAnimal <|.. flyWeight.Cat
+
+Main --> FactoryAnimal : used
+FactoryAnimal --> Cat : create & used
+FactoryAnimal --> Dog : create & used
+@endumlj
