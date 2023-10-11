@@ -1,5 +1,5 @@
 package architectoryHW6.bridge.colors;
 
-interface Color {
+public interface Color {
     void color();
 }

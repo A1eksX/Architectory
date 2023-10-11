@@ -1,6 +1,6 @@
 package architectoryHW6.bridge.colors;
 
-import architectoryHW6.bridge.Color;
+import architectoryHW6.bridge.colors.Color;
 
 public class Black implements Color {
     @Override
