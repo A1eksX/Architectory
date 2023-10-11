@@ -1,4 +1,4 @@
-package ArchitecrotySeminar4.testTask;
+package architectorySeminar4.testTask;
 
 public class Animal {
     private String name;

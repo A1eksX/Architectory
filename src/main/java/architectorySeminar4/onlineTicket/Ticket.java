@@ -1,4 +1,4 @@
-package ArchitecrotySeminar4.onlineTicket;
+package architectorySeminar4.onlineTicket;
 
 
 import java.util.Date;

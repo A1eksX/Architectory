@@ -1,4 +1,4 @@
-package ArchitecrotySeminar4.testTask;
+package architectorySeminar4.testTask;
 
 public class Main {
     public static void main(String[] args) {
