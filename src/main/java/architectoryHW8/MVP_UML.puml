@@ -1,0 +1,53 @@
+@startuml
+class architectorySeminar8.mvi.Main {
++ {static} void main(String[])
+}
+class architectorySeminar8.mvi.model.TaskCompletedIntent {
+~ int taskId
++ int getTaskId()
+}
+class architectorySeminar8.mvi.presenter.TasksPresenter {
+- List<Task> tasks
+- BaseView view
++ void dispatch(Intent)
++ void loadTasks()
+}
+interface architectorySeminar8.mvi.view.BaseView {
+~ void render(ViewState)
+}
+interface architectorySeminar8.mvi.model.ViewState {
+}
+class architectorySeminar8.mvi.model.TasksViewState {
+- List<Task> tasks
++ String toString()
+}
+class architectorySeminar8.mvi.model.Task {
+- String name
+- boolean completed
++ void complete()
++ boolean isCompleted()
++ String toString()
+}
+class architectorySeminar8.mvi.view.ConsoleView {
++ void render(ViewState)
+}
+interface architectorySeminar8.mvi.model.Intent {
+}
+
+
+Intent <|.. TaskCompletedIntent
+ViewState <|.. TasksViewState
+BaseView <|.. ConsoleView
+
+Task ..> TaskCompletedIntent
+Task ..> TasksViewState
+
+view ..> TasksPresenter
+Main ..> ConsoleView : creates
+Main ..> TasksPresenter : creates
+TasksPresenter ..> Task
+
+
+
+
+@enduml
